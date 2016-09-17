@@ -145,7 +145,6 @@ let is_reserved_keyword = function
   | T_PRIVATE
   | T_PROTECTED
   | T_PUBLIC
-  | T_YIELD
   | T_TYPE
   | T_DEBUGGER
   | T_DECLARE
@@ -1918,13 +1917,6 @@ end = struct
      *   shouldn't need to backtrack to parse this. ArrowFunctionFunction is a little tricky
      *)
     let rec assignment env =
-      (* So this expression we are parsing first may be the params to an arrow
-       * function. In case it is, let's remember the starting location and
-       * ending location. That way we can properly report the location of the
-       * arrow function expression *)
-      if Peek.token env = T_YIELD && env.allow_yield
-      then yield env
-      else begin
         let start_loc = Peek.loc env in
         let expr = conditional { env with no_arrow_parens = false; } in
         let end_loc = match last_loc env with
@@ -1958,19 +1950,6 @@ end = struct
             }))
           | _ -> expr
         end
-    end
-
-    and yield env =
-      let start_loc = Peek.loc env in
-      Expect.token env T_YIELD;
-      if not env.allow_yield
-      then error env Error.IllegalYield;
-      let delegate = Expect.maybe env T_MULT in
-      let argument = assignment env in
-      Loc.btwn start_loc (fst argument), Expression.(Yield Yield.({
-        argument;
-        delegate;
-      }))
 
     and is_lhs = Expression.(function
       | _, Member _
