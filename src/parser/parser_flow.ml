@@ -876,7 +876,7 @@ end = struct
         defaults;
         rest;
         body;
-        generator;
+        generator = false;
         async;
         predicate;
         expression;
@@ -1502,7 +1502,7 @@ end = struct
         defaults;
         rest;
         body;
-        generator;
+        generator = false;
         async;
         predicate;
         expression;
@@ -1972,7 +1972,7 @@ end = struct
         defaults;
         rest;
         body;
-        generator;
+        generator = false;
         async;
         predicate = None; (* setters/getter are not predicates *)
         expression;
@@ -2070,7 +2070,7 @@ end = struct
                   defaults;
                   rest;
                   body;
-                  generator;
+                  generator = false;
                   async;
                   (* TODO: add support for object method predicates *)
                   predicate = None;
@@ -2278,7 +2278,7 @@ end = struct
             defaults;
             rest;
             body;
-            generator;
+            generator = false;
             async;
             (* TODO: add support for method predicates *)
             predicate = None;
