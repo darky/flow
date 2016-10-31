@@ -73,7 +73,6 @@
     | T_PRIVATE
     | T_PROTECTED
     | T_PUBLIC
-    | T_YIELD
     | T_DEBUGGER
     | T_DECLARE
     | T_TYPE
@@ -204,7 +203,6 @@
     | T_PRIVATE -> "private"
     | T_PROTECTED -> "protected"
     | T_PUBLIC -> "public"
-    | T_YIELD -> "yield"
     | T_DEBUGGER -> "debugger"
     | T_DECLARE -> "declare"
     | T_TYPE -> "type"
@@ -465,7 +463,6 @@
       "private", T_PRIVATE;
       "protected", T_PROTECTED;
       "public", T_PUBLIC;
-      "yield", T_YIELD;
       "debugger", T_DEBUGGER;
       "declare", T_DECLARE;
       "type", T_TYPE;

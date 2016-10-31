@@ -240,7 +240,7 @@ let init_env ?(token_sink=None) ?(parse_options=None) source content =
     no_let = false;
     no_anon_function_type = false;
     no_new = false;
-    allow_yield = true;
+    allow_yield = false;
     allow_await = false;
     error_callback = None;
     lex_mode_stack = ref [Lex_mode.NORMAL];
@@ -336,7 +336,6 @@ let is_strict_reserved = function
   | "protected"
   | "public"
   | "static"
-  | "yield" -> true
   | _ -> false
 
 let is_restricted = function

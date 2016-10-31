@@ -98,7 +98,6 @@ module Expression
       | _ -> ret
     in fun env ->
       match Peek.token env, Peek.is_identifier env with
-      | T_YIELD, _ when (allow_yield env) -> yield env
       | T_LPAREN, _
       | T_LESS_THAN, _
       | _, true ->
@@ -121,32 +120,6 @@ module Expression
           )
         )
       | _ -> assignment_but_not_arrow_function env
-
-  and yield env =
-    let start_loc = Peek.loc env in
-    Expect.token env T_YIELD;
-    if not (allow_yield env)
-    then error env Error.IllegalYield;
-    let delegate = Expect.maybe env T_MULT in
-    let has_argument = not (
-      Peek.token env = T_SEMICOLON || Peek.is_implicit_semicolon env
-    ) in
-    let argument =
-      if delegate || has_argument
-      then Some (assignment env)
-      else None in
-    let end_loc = match argument with
-    | Some expr -> fst expr
-    | None ->
-        let end_loc = match Peek.semicolon_loc env with
-          | Some loc -> loc
-          | None -> start_loc in
-        Eat.semicolon env;
-        end_loc in
-    Loc.btwn start_loc end_loc, Expression.(Yield Yield.({
-      argument;
-      delegate;
-    }))
 
   and is_lhs = Expression.(function
     | _, Member _
@@ -610,7 +583,7 @@ module Expression
       id;
       params;
       body;
-      generator;
+      generator = false;
       async;
       predicate;
       expression;
@@ -981,7 +954,6 @@ module Expression
       | T_PRIVATE
       | T_PROTECTED
       | T_PUBLIC
-      | T_YIELD
       | T_ANY_TYPE
       | T_BOOLEAN_TYPE
       | T_NUMBER_TYPE

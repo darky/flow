@@ -108,7 +108,7 @@ module Object
       id = None;
       params;
       body;
-      generator;
+      generator = false;
       async;
       predicate = None; (* setters/getter are not predicates *)
       expression;
@@ -209,7 +209,7 @@ module Object
                 id = None;
                 params;
                 body;
-                generator;
+                generator = false;
                 async;
                 (* TODO: add support for object method predicates *)
                 predicate = None;
@@ -390,7 +390,7 @@ module Object
           id = None;
           params;
           body;
-          generator;
+          generator = false;
           async;
           (* TODO: add support for method predicates *)
           predicate = None;

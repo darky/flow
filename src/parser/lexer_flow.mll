@@ -77,7 +77,6 @@ module Token = struct
     | T_PRIVATE
     | T_PROTECTED
     | T_PUBLIC
-    | T_YIELD
     | T_DEBUGGER
     | T_DECLARE
     | T_TYPE
@@ -207,7 +206,6 @@ module Token = struct
     | T_PRIVATE -> "T_PRIVATE"
     | T_PROTECTED -> "T_PROTECTED"
     | T_PUBLIC -> "T_PUBLIC"
-    | T_YIELD -> "T_YIELD"
     | T_DEBUGGER -> "T_DEBUGGER"
     | T_DECLARE -> "T_DECLARE"
     | T_TYPE -> "T_TYPE"
@@ -716,7 +714,6 @@ end
       "private", T_PRIVATE;
       "protected", T_PROTECTED;
       "public", T_PUBLIC;
-      "yield", T_YIELD;
       "debugger", T_DEBUGGER;
       "declare", T_DECLARE;
       "type", T_TYPE;
@@ -750,7 +747,7 @@ let unicode_whitespace =
   ('\xE2''\x80''\x87')|('\xE2''\x80''\x88')|('\xE2''\x80''\x89')|
   ('\xE2''\x80''\x8A')|('\xE2''\x80''\xAF')|('\xE2''\x81''\x9F')|
   ('\xE3''\x80''\x80')|('\xEF''\xBB''\xBF')
-let whitespace = [' ' '\t' '\r' '\x0c'] | unicode_whitespace
+let whitespace = [' ' '\t' '\r' '\x0c'] | unicode_whitespace | ('y''i''e''l''d')
 
 (* Different ways you can write a number *)
 let binnumber = '0' ['B''b'] ['0''1']+

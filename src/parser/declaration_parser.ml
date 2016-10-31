@@ -248,7 +248,7 @@ module Declaration
       id;
       params;
       body;
-      generator;
+      generator = false;
       async;
       predicate;
       expression;
